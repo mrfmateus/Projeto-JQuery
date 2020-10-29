@@ -2,12 +2,14 @@ var inputDigitacao = $(".digitacao");
 var campoTempo = $("#tempo-restante");
 var tempoInicial = campoTempo.text();
 var frase = $(".frase").text();
+var botaoRemover = $(".botao-remover");
 
 $(function () {
   alteraTamanhoFrase();
   adicionaEventoContador();
   inicializaTemporizador();
   inicializaMarcadorBorda();
+  removePlacarDaTabela();
   $("#botao-reiniciar").click(reiniciaJogo);
 });
 
@@ -19,8 +21,8 @@ function alteraTamanhoFrase() {
 
 function adicionaEventoContador() {
   inputDigitacao.on("input", function () {
-    qtdCaracteres = this.value.length;
-    qtdPalavras = this.value.split(/\S+/).length - 1;
+    var qtdCaracteres = this.value.length;
+    var qtdPalavras = this.value.split(/\S+/).length - 1;
     $("#contador-caracteres").text(qtdCaracteres);
     $("#contador-palavras").text(qtdPalavras);
   });
@@ -42,6 +44,23 @@ function inicializaTemporizador() {
 
 function inserePlacarNaTabela() {
   var corpoTabela = $(".placar").find("tbody");
+  var usuario = "Mateus";
+  var qtdPalavras = $("#contador-palavras").text();
+  var botaoRemover = "<a href='#' class='botao-remover'><i class='material-icons'>delete</i></a>";
+  placarNovo =
+    "<tr>" +
+    " <td>" + usuario + "</td>" +
+    " <td>" + qtdPalavras + "</td>" +
+    " <td>" + botaoRemover + "</td>" +
+    "</tr>";
+  corpoTabela.prepend(placarNovo);
+}
+
+function removePlacarDaTabela() {
+  botaoRemover.click(function (event) {
+    event.preventDefault();
+    $(this).parent().parent().remove();
+  });
 }
 
 function finalizaJogo() {
