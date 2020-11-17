@@ -1,7 +1,6 @@
 var inputDigitacao = $(".digitacao");
 var campoTempo = $("#tempo-restante");
 var tempoInicial = campoTempo.text();
-var frase = $(".frase").text();
 
 $(function () {
   alteraTamanhoFrase();
@@ -11,7 +10,12 @@ $(function () {
   $("#botao-reiniciar").click(reiniciaJogo);
 });
 
+function alteraTempoInicial(tempo) {
+  campoTempo.text(tempo);
+}
+
 function alteraTamanhoFrase() {
+  var frase = $(".frase").text();
   var numPalavras = frase.split(/\S+/).length - 1;
   var tamanhoFrase = $("#tamanho-frase");
   tamanhoFrase.text(numPalavras);
@@ -60,6 +64,7 @@ function reiniciaJogo() {
 
 function inicializaMarcadorBorda() {
   inputDigitacao.on("input", function () {
+    var frase = $(".frase").text();
     var comparar = frase.substr(0, inputDigitacao.val().length);
     var digitado = inputDigitacao.val();
     if (digitado == comparar) {
