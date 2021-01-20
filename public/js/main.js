@@ -8,6 +8,7 @@ $(function () {
   inicializaTemporizador();
   inicializaMarcadorBorda();
   $("#botao-reiniciar").click(reiniciaJogo);
+  atualizaPlacar();
 });
 
 function alteraTempoInicial(tempo) {

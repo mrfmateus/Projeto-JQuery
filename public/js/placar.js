@@ -68,5 +68,19 @@ function sincronizaPlacar() {
     placar.push(score);
   });
 
-  console.log(placar);
+  var dados = {
+    placar: placar
+  }
+
+  $.post("http://localhost:3000/placar", dados);
+}
+
+function atualizaPlacar() {
+  $.get("http://localhost:3000/placar", function (data) {
+    $(data).each(function () {
+      var linha = criaLinhaNova(this.usuario, this.pontos);
+      linha.find(".botao-remover").click(removePlacarDaTabela);
+      $("tbody").append(linha);
+    });
+  });
 }
