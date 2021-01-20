@@ -1,6 +1,8 @@
 var secPlacar = $(".placar");
 var botaoPlacar = $("#botao-placar");
+var botaoSincronizar = $("#botao-sync");
 botaoPlacar.click(mostraPlacar);
+botaoSincronizar.click(sincronizaPlacar);
 
 function inserePlacarNaTabela() {
   var corpoTabela = $(".placar").find("tbody");
@@ -48,4 +50,23 @@ function scrollPlacar() {
   $("html, body").animate({
     scrollTop: posicaoPlacar + "px"
   }, 1000);
+}
+
+function sincronizaPlacar() {
+  var placar = [];
+  var linhas = $("tbody>tr");
+
+  linhas.each(function () {
+    var usuario = $(this).find("td:nth-child(1)").text();
+    var palavras = $(this).find("td:nth-child(2)").text();
+
+    var score = {
+      usuario: usuario,
+      pontos: palavras
+    };
+
+    placar.push(score);
+  });
+
+  console.log(placar);
 }
