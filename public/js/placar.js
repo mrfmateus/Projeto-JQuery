@@ -6,7 +6,7 @@ botaoSincronizar.click(sincronizaPlacar);
 
 function inserePlacarNaTabela() {
   var corpoTabela = $(".placar").find("tbody");
-  var usuario = "Mateus";
+  var usuario = $("#usuarios").val();
   var qtdPalavras = $("#contador-palavras").text();
   var linhaNova = criaLinhaNova(usuario, qtdPalavras);
   linhaNova.find(".botao-remover").click(removePlacarDaTabela);
@@ -72,7 +72,17 @@ function sincronizaPlacar() {
     placar: placar
   }
 
-  $.post("http://localhost:3000/placar", dados);
+  $.post("http://localhost:3000/placar", dados, function () {
+    $(".tooltip").tooltipster("open").tooltipster("content", "Sucesso!");
+  })
+    .fail(function () {
+      $(".tooltip").tooltipster("open").tooltipster("content", "Falha!");
+    })
+    .always(function () {
+      setTimeout(function () {
+        $(".tooltip").tooltipster("close");
+      }, 1500);
+    });
 }
 
 function atualizaPlacar() {

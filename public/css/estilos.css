@@ -49,3 +49,20 @@ body {
 #botao-sync {
   float: right;
 }
+
+.select_usuarios{
+  display: inline-block;
+}
+
+#usuarios{
+  display: block;
+}
+
+.selectize-control {
+  width: 150px;
+  vertical-align: middle;
+}
+
+.selectize-input {
+  vertical-align: middle;
+}
